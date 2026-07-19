@@ -1,67 +1,286 @@
-# PINCH·TIME
+<div align="center">
 
-Control video playback with your hand. The distance between your thumb and
-index finger becomes a continuous time controller: fingers together = normal
-playback, opening them slows the video down, freezes it, and finally plays
-it in reverse.
+# 🤏 PINCH·TIME
 
-On top of that, the output video also has classic mouse controls, like any
-video player:
-- **Seek** — click or drag anywhere on the progress bar.
-- **Volume** — slider + mute button, works together with the gesture-driven
-  audio (reverse tape rewind, forward fade-in).
-- **Fullscreen** — the fullscreen button expands just the video panel to
-  fill the whole screen and hides the camera panel; leaving fullscreen
-  (button or Esc) restores the normal split view.
+### Time doesn't live on a timeline anymore.
 
-Built with React + Vite + TypeScript + MediaPipe Hand Landmarker.
+Control video playback using nothing but your hand.
+Pinch to play. Open your fingers to slow down, freeze, or travel backwards in time.
 
-## Run it
+<p>
+
+<a href="https://pinchthetime.netlify.app">
+<img src="https://img.shields.io/badge/🌐_Live_Demo-Netlify-00C7B7?style=for-the-badge">
+</a>
+
+<img src="https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=white">
+
+<img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white">
+
+<img src="https://img.shields.io/badge/MediaPipe-Hand_Tracking-FF6F00?style=for-the-badge">
+
+<img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white">
+
+</p>
+
+</div>
+
+---
+
+# 📸 Preview
+
+> Save these images inside:
+
+```
+docs/previews/preview-1.png
+docs/previews/preview-2.png
+```
+
+<table>
+<tr>
+
+<td width="50%">
+
+<img src="docs/previews/preview-1.png"/>
+
+</td>
+
+<td width="50%">
+
+<img src="docs/previews/preview-2.png"/>
+
+</td>
+
+</tr>
+</table>
+
+---
+
+# 🌐 Live Demo
+
+## 👉 https://pinchthetime.netlify.app/
+
+Experience the interaction yourself directly in your browser.
+
+No installation required.
+
+---
+
+# ✨ What is PINCH·TIME?
+
+PINCH·TIME explores a different way of interacting with digital media.
+
+Instead of dragging a timeline or pressing buttons, the distance between your thumb and index finger becomes a continuous timeline controller.
+
+Your hand literally controls time.
+
+The result feels somewhere between gesture interaction, cinematic editing and science-fiction interfaces.
+
+---
+
+# 🎬 Gesture Mapping
+
+| Gesture | Action |
+|----------|--------|
+| 🤏 Fingers together | Normal playback |
+| 👌 Slightly open | Slow motion |
+| ✋ Half open | Freeze frame |
+| 🖐 Fully open | Reverse playback |
+
+Instead of jumping between fixed states, the transition is completely continuous.
+
+---
+
+# 🎥 Traditional Controls
+
+Gesture interaction doesn't replace familiar controls—it enhances them.
+
+✔ Play / Pause
+
+✔ Timeline Scrubbing
+
+✔ Drag to Seek
+
+✔ Volume Slider
+
+✔ Mute
+
+✔ Fullscreen
+
+✔ Keyboard Shortcuts
+
+Everything works together seamlessly.
+
+---
+
+# ⚡ Highlights
+
+### 🎯 Real-time Hand Tracking
+
+Powered by MediaPipe Hand Landmarker.
+
+Tracks hand landmarks at high frame rates with extremely low latency.
+
+---
+
+### ⏪ Continuous Reverse Playback
+
+Not just a visual trick.
+
+The playback engine actually reconstructs reverse motion frame-by-frame while synchronizing dedicated reverse audio.
+
+---
+
+### 🔊 Dynamic Audio Engine
+
+The audio changes depending on playback direction.
+
+Forward playback smoothly fades in.
+
+Reverse playback activates a custom rewind audio buffer.
+
+---
+
+### 🎨 Cinematic Landing Experience
+
+The homepage reacts to the visitor.
+
+• Aurora animations
+
+• Rain simulation
+
+• Depth parallax
+
+• Magnetic buttons
+
+• Floating particles
+
+• Interactive hero
+
+• Cursor-driven effects
+
+• Easter eggs
+
+Everything is designed to feel alive.
+
+---
+
+# 🧠 Under the Hood
+
+```
+Camera
+     │
+     ▼
+MediaPipe
+     │
+Hand Detection
+     │
+Pinch Distance
+     │
+One Euro Filter
+     │
+Velocity Mapping
+     │
+Scrub Engine
+     │
+Reverse Audio
+     │
+Video Playback
+```
+
+---
+
+# 🛠 Tech Stack
+
+| Frontend | AI | Media | Tooling |
+|-----------|----|--------|----------|
+| React | MediaPipe | HTML Video API | Vite |
+| TypeScript | Hand Landmarker | Web Audio API | ESLint |
+| CSS | | Fullscreen API | npm |
+
+---
+
+# 🚀 Run Locally
 
 ```bash
 npm install
+
 npm run dev
 ```
 
-Then open the URL Vite prints (usually http://localhost:5173).
+Open
 
-## Status
+```
+http://localhost:5173
+```
 
-- [x] Phase 1 — Project setup (EventBus, RafLoop, config)
-- [x] Phase 2 — Upload screen + app window UI + CameraService
-- [x] Phase 3 — MediaPipe hand tracking + landmark overlay
-- [x] Phase 4 — Pinch signal + One Euro filter
-- [x] Phase 5 — Velocity mapping
-- [x] Phase 6 — Scrub engine (reverse playback)
-- [x] Phase 7 — Interaction polish (One Euro + velocity smoothing + hysteresis)
-- [x] Phase 8 — Reverse audio engine (Web Audio, reversed buffer)
-- [x] Phase 9 — UI design (velocity color system, HUD, hero landing)
-- [x] Phase 10 — Final landing page (How it works, gesture map, tech stack)
+---
 
-## Deploy
+# 📈 Development Progress
 
-Push to GitHub, import the repo in [Vercel](https://vercel.com) and deploy — no config needed (Vite is auto-detected). Add screenshots/GIFs of the interaction here for the portfolio.
+- ✅ Project architecture
+- ✅ Camera service
+- ✅ Hand tracking
+- ✅ Landmark overlay
+- ✅ Pinch detection
+- ✅ One Euro filter
+- ✅ Velocity mapping
+- ✅ Reverse playback engine
+- ✅ Reverse audio engine
+- ✅ UI redesign
+- ✅ Landing page
+- ✅ Gesture HUD
+- ✅ Mouse controls
+- ✅ Fullscreen mode
+- ✅ Interactive hero
+- ✅ Animations
+- ✅ Performance polish
 
-## Alive experience
+---
 
-The page now responds to the visitor: scroll drives parallax depth layers, rain intensity and the hero dissolve; buttons are magnetic; the dropzone tilts in 3D under the cursor; the hero hand visual stretches its signal thread toward your pointer; dust particles and an aurora keep the room breathing; and double-clicking the opening wakes up the city lights (easter egg).
+# 🎮 Keyboard
 
-## Minimal, cinematic redesign
+| Key | Action |
+|------|--------|
+| Space | Play / Pause |
+| Esc | Exit Fullscreen |
 
-The landing now opens almost empty — one line, one scroll cue — then unfolds: a visual hand+signal explainer, the live demo as a discovered moment, an "experiments lab" instead of a feature list, a quiet signal-to-screen diagram, and a one-line before/after. Copy is intentionally sparse throughout.
+---
 
-## Full product landing (superseded)
+# ⚙ Configuration
 
-The homepage is a complete scroll story: hero with live demo, philosophy statement, interaction timeline, how-it-works pipeline, features grid, tech stack, architecture diagram, traditional-vs-gesture comparison, animated performance stats, and an FAQ accordion — all with scroll-reveal animations.
+All interaction tuning lives in
 
-## Spacebar pause
+```
+src/config/interaction.ts
+```
 
-Pressing Space toggles play/pause through the engine itself (not the raw video element), so a manual pause freezes playback and overrides the gesture signal until you resume — no fighting between mouse and hand control.
+including
 
-## Mouse controls
+- pinch calibration
+- smoothing
+- velocity curves
+- dead zones
+- hysteresis
+- reverse thresholds
+- audio behavior
 
-Hover the video for a YouTube-style bar: play/pause, click-or-drag seek, volume, and a fullscreen toggle that hides the camera panel and expands the video to fill the screen (uses the browser Fullscreen API). Gesture control keeps working underneath — the mouse just gives you a manual override.
+---
 
-## Tuning
+# 💡 Why this project?
 
-Everything about the feel lives in `src/config/interaction.ts`: the pinch calibration, the velocity curve (including the natural-rest plateau), smoothing amounts and audio thresholds.
+Most video players ask users to adapt to the interface.
+
+PINCH·TIME asks the interface to adapt to the user.
+
+It's an experiment exploring whether gestures can become a more natural way of controlling time itself.
+
+---
+
+<div align="center">
+
+### ⭐ If you enjoyed the project, consider giving it a star.
+
+Made with ❤️ using React, TypeScript and MediaPipe.
+
+</div>
