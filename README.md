@@ -29,9 +29,6 @@ Pinch to play. Open your fingers to slow down, freeze, or travel backwards in ti
 
 # 📸 Preview
 
-> Save these images inside:
-
-
 <img src="preview-1.png"/>
 <img src="preview-2.png"/>
 
