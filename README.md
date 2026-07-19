@@ -215,11 +215,15 @@ http://localhost:5173
 
 ---
 
-# 🎮 Keyboard
+# 🎮 Keyboard Shortcuts
 
 | Key | Action |
-|------|--------|
-| Space | Play / Pause |
+|:---:|--------|
+| ␣ Space | Play / Pause |
+| ← | Rewind 15 seconds |
+| → | Skip forward 15 seconds |
+| M | Mute / Unmute |
+| F | Toggle Fullscreen |
 | Esc | Exit Fullscreen |
 
 ---
