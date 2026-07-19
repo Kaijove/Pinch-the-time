@@ -29,8 +29,8 @@ Pinch to play. Open your fingers to slow down, freeze, or travel backwards in ti
 
 # 📸 Preview
 
-<td width="100%"><img src="preview-2.png" alt="Calendar and live logs panel" width="100%"/>
-<td width="100%"><img src="preview-2.png" alt="Calendar and live logs panel" width="100%"/>
+<td width="100%"><img src="preview-1.PNG" alt="Calendar and live logs panel" width="100%"/>
+<td width="100%"><img src="preview-2.PNG" alt="Calendar and live logs panel" width="100%"/>
 ---
 
 # 🌐 Live Demo
