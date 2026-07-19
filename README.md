@@ -8,6 +8,13 @@ Control video playback using nothing but your hand.
 Pinch to play. Open your fingers to slow down, freeze, or travel backwards in time.
 
 <p>
+# 🌐 Live Demo
+
+## 👉 https://pinchthetime.netlify.app/
+
+Experience the interaction yourself directly in your browser.
+
+No installation required.
 
 <a href="https://pinchthetime.netlify.app">
 <img src="https://img.shields.io/badge/🌐_Live_Demo-Netlify-00C7B7?style=for-the-badge">
@@ -31,15 +38,6 @@ Pinch to play. Open your fingers to slow down, freeze, or travel backwards in ti
 
 <td width="100%"><img src="preview-1.PNG" alt="Calendar and live logs panel" width="100%"/>
 <td width="100%"><img src="preview-2.PNG" alt="Calendar and live logs panel" width="100%"/>
----
-
-# 🌐 Live Demo
-
-## 👉 https://pinchthetime.netlify.app/
-
-Experience the interaction yourself directly in your browser.
-
-No installation required.
 
 ---
 
