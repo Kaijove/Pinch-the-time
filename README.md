@@ -31,10 +31,10 @@ Pinch to play. Open your fingers to slow down, freeze, or travel backwards in ti
 
 > Save these images inside:
 
-```
-docs/previews/preview-1.png
-docs/previews/preview-2.png
-```
+
+<img src="docs/previews/preview-1.png"/>
+<img src="docs/previews/preview-2.png"/>
+
 
 <table>
 <tr>
