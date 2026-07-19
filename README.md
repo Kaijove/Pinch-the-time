@@ -8,13 +8,21 @@ Control video playback using nothing but your hand.
 Pinch to play. Open your fingers to slow down, freeze, or travel backwards in time.
 
 <p>
+<div align="center">
+
 # 🌐 Live Demo
 
-## 👉 https://pinchthetime.netlify.app/
+### ✨ Experience **PinchTheTime** directly in your browser
 
-Experience the interaction yourself directly in your browser.
+## 👉 **https://pinchthetime.netlify.app/**
 
-No installation required.
+*No downloads. No installation. Just open the link and start controlling your videos with intuitive hand gestures.*
+
+<br>
+
+> 🎥 **Real-time gesture recognition** • ⚡ Instant response • 🖐️ Natural controls
+
+</div>
 
 <a href="https://pinchthetime.netlify.app">
 <img src="https://img.shields.io/badge/🌐_Live_Demo-Netlify-00C7B7?style=for-the-badge">
