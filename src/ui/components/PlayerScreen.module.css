@@ -1,0 +1,606 @@
+/* ── Floating glass panels over the city ── */
+.stage {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  gap: 16px;
+  padding: 4px 20px 16px;
+}
+
+.camPanel,
+.videoPanel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: 22px;
+  overflow: hidden;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 30px 80px rgba(4, 8, 18, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+.camPanel {
+  flex: 0 0 34%;
+}
+
+.videoPanel {
+  flex: 1;
+}
+
+.panelHead {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 18px;
+  border-bottom: 1px solid var(--glass-border-soft);
+}
+
+.panelLabel {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 3px;
+  color: var(--faint);
+}
+
+.trackDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--faint);
+  transition: background 0.4s, box-shadow 0.4s;
+}
+
+.trackDot[data-state='on'] {
+  background: var(--v-forward);
+  box-shadow: 0 0 10px var(--v-forward);
+  animation: pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  50% { opacity: 0.5; }
+}
+
+.debug {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--faint);
+}
+
+.speed {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  transition: color 0.2s;
+  font-variant-numeric: tabular-nums;
+}
+
+/* camera in a rounded glass frame, softly glowing */
+.camWrap {
+  position: relative;
+  margin: 16px;
+  aspect-ratio: 4 / 3;
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(8, 12, 24, 0.6);
+  border: 1px solid var(--glass-border-soft);
+  box-shadow: 0 0 40px rgba(143, 214, 232, 0.06), inset 0 0 30px rgba(4, 8, 18, 0.4);
+}
+
+.camVideo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1);
+  filter: saturate(0.6) brightness(0.85) contrast(1.02);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.legend {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 18px 18px;
+  margin-top: auto;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.legend span::before {
+  content: '';
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.legend span:not(:last-child)::after {
+  content: '·';
+  display: inline-block;
+  margin-left: 10px;
+  color: var(--faint);
+  font-weight: 400;
+}
+
+.lgForward { color: var(--muted); }
+.lgForward::before { background: var(--v-forward); }
+.lgFrozen { color: var(--muted); }
+.lgFrozen::before { background: var(--v-frozen); }
+.lgReverse { color: var(--muted); }
+.lgReverse::before { background: var(--v-reverse); }
+
+/* the video as a premium media surface */
+.videoWrap {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  margin: 16px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(4, 6, 14, 0.85);
+  border: 1px solid var(--glass-border-soft);
+}
+
+.video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  cursor: pointer;
+}
+
+/* ── YouTube-style control bar: hidden until hover, glass over the video ── */
+.bottomBar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 28px 14px 12px;
+  background: linear-gradient(180deg, transparent, rgba(4, 6, 14, 0.85) 40%, rgba(4, 6, 14, 0.96));
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+
+.videoWrap:hover .bottomBar,
+.videoWrap:focus-within .bottomBar {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+.progressTrack {
+  position: relative;
+  height: 4px;
+  margin: 0 4px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+  cursor: pointer;
+  touch-action: none;
+}
+
+.progressTrack::before {
+  /* enlarges the hit area without enlarging the visual track */
+  content: '';
+  position: absolute;
+  inset: -8px 0;
+}
+
+.progressFill {
+  position: relative;
+  height: 100%;
+  width: 0%;
+  border-radius: 999px;
+  background: var(--v-forward);
+  transition: width 0.12s linear;
+}
+
+.progressFill::after {
+  content: '';
+  position: absolute;
+  right: -6px;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: currentColor;
+  color: inherit;
+  transform: translateY(-50%) scale(0);
+  transition: transform 0.2s ease;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.progressTrack:hover .progressFill::after {
+  transform: translateY(-50%) scale(1);
+}
+
+.controlsRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 4px 10px;
+  background: rgba(14, 18, 30, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.ctrlBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  color: var(--text);
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  opacity: 0.85;
+  flex-shrink: 0;
+  transition: opacity 0.2s, background 0.2s, transform 0.15s;
+}
+
+.ctrlBtn:active {
+  transform: scale(0.92);
+}
+
+.ctrlBtn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.ctrlBtn:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* the play button: bigger, filled, the visual anchor of the whole bar */
+.playBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  padding: 0;
+  color: #0c1220;
+  background: linear-gradient(180deg, #f4f7fb, #dbe6f2);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(168, 200, 240, 0.3);
+  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.2s;
+}
+
+.playBtn svg {
+  width: 15px;
+  height: 15px;
+}
+
+.playBtn:hover {
+  transform: scale(1.06);
+  box-shadow: 0 10px 34px rgba(168, 200, 240, 0.5);
+}
+
+.playBtn:active {
+  transform: scale(0.95);
+}
+
+.timeLabel {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  margin-left: 2px;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.volumeGroup {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.volumeSlider {
+  width: 70px;
+  height: 3px;
+  accent-color: var(--v-forward);
+  cursor: pointer;
+  background: transparent;
+}
+
+@media (max-width: 720px) {
+  .controlsRow {
+    max-width: none;
+    gap: 4px;
+    padding: 4px 8px;
+  }
+  .volumeSlider {
+    width: 40px;
+  }
+}
+
+/* ── True fullscreen: video takes the whole stage, camera panel steps aside ── */
+.fullscreenActive {
+  padding: 0;
+  gap: 0;
+  background: #000;
+}
+
+.fullscreenActive .camPanel {
+  display: none;
+}
+
+.fullscreenActive .legend {
+  display: none;
+}
+
+.fullscreenActive .videoPanel {
+  border-radius: 0;
+  border: none;
+}
+
+.fullscreenActive .videoWrap {
+  margin: 0;
+  border-radius: 0;
+  border: none;
+}
+
+.fullscreenActive .panelHead {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  border-bottom: none;
+  background: linear-gradient(180deg, rgba(4, 6, 14, 0.7), transparent);
+}
+
+.startLayer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  background: rgba(8, 11, 22, 0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 3;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.startButton {
+  padding: 13px 32px;
+  font-size: 14.5px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: #0c1220;
+  background: linear-gradient(180deg, #f4f7fb, #dbe6f2);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.25s, box-shadow 0.25s;
+  box-shadow: 0 10px 36px rgba(168, 200, 240, 0.22);
+}
+
+.startButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 44px rgba(168, 200, 240, 0.32);
+}
+
+.startHint {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  max-width: 380px;
+  text-align: center;
+  line-height: 1.7;
+}
+
+.statusChip {
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 7px 17px;
+  background: var(--glass-strong);
+  border: 1px solid var(--glass-border);
+  border-radius: 999px;
+  color: var(--text);
+  font-size: 12px;
+  pointer-events: none;
+  z-index: 2;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.exitButton {
+  position: absolute;
+  top: 14px;
+  right: 32px;
+  padding: 6px 13px;
+  font-size: 10.5px;
+  font-family: var(--font-mono);
+  color: var(--muted);
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: 9px;
+  cursor: pointer;
+  z-index: 3;
+  backdrop-filter: blur(10px);
+  transition: color 0.25s, border-color 0.25s;
+}
+
+.exitButton:hover {
+  color: var(--text);
+  border-color: rgba(168, 200, 240, 0.4);
+}
+
+@media (max-width: 720px) {
+  .stage {
+    flex-direction: column;
+  }
+  .camPanel {
+    flex: 0 0 42%;
+  }
+  .camWrap {
+    aspect-ratio: auto;
+    flex: 1;
+  }
+}
+
+/* ── the once-dead space below the tracker legend: a quiet guide ── */
+.tipsPanel {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  padding: 14px 18px 16px;
+  border-top: 1px solid var(--glass-border-soft);
+  margin-top: 4px;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.tipsPanel::-webkit-scrollbar {
+  display: none;
+}
+
+.tipsLabel {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--faint);
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.tipsGrid,
+.keyGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.keyGrid > :last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
+
+.tipCard,
+.keyCard {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 12px;
+  background: var(--glass);
+  border: 1px solid var(--glass-border-soft);
+  border-radius: 11px;
+  transition: border-color 0.25s, background 0.25s, transform 0.2s;
+}
+
+.keyCard {
+  justify-content: center;
+}
+
+.tipCard:hover,
+.keyCard:hover {
+  border-color: var(--glass-border);
+  background: var(--glass-strong);
+  transform: translateY(-1px);
+}
+
+.tipText {
+  font-size: 11.5px;
+  color: var(--muted);
+  line-height: 1.35;
+}
+
+.tipsDivider {
+  flex-shrink: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--glass-border-soft);
+}
+
+.key {
+  flex-shrink: 0;
+  padding: 4px 9px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text);
+  background: var(--glass-strong);
+  border: 1px solid var(--glass-border);
+  border-radius: 6px;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.25);
+}
+
+.keyPair {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.tipDot {
+  flex-shrink: 0;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  box-shadow: 0 0 10px currentColor;
+}
+
+.tipGlyph {
+  flex-shrink: 0;
+  width: 22px;
+  text-align: center;
+  color: var(--faint);
+  font-size: 15px;
+}
+
+@media (max-width: 720px) {
+  .tipsPanel {
+    display: none;
+  }
+}
