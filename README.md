@@ -29,9 +29,8 @@ Pinch to play. Open your fingers to slow down, freeze, or travel backwards in ti
 
 # 📸 Preview
 
-<img src="preview-1.png"/>
-<img src="preview-2.png"/>
-
+<td width="100%"><img src="preview-2.png" alt="Calendar and live logs panel" width="100%"/><p align="center">Color-coded live system logs with filtering, next to the monthly calendar widget.</p></td>
+<td width="100%"><img src="preview-2.png" alt="Calendar and live logs panel" width="100%"/><p align="center">Color-coded live system logs with filtering, next to the monthly calendar widget.</p></td>
 ---
 
 # 🌐 Live Demo
